@@ -9,6 +9,7 @@ import (
   "sort"
   "os"
   "strconv"
+	"os/user"
 )
 
 type tokenSpec struct {
@@ -35,7 +36,12 @@ func main() {
     panic(err)
   }
 
-	content, err := ioutil.ReadFile("token.json")
+	usr, err := user.Current()
+  if err != nil {
+      panic(err)
+  }
+
+	content, err := ioutil.ReadFile(fmt.Sprintf("%v/.review-helper.json", usr.HomeDir))
 	if err != nil {
 		panic(err)
 	}
