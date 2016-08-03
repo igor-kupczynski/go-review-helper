@@ -1,15 +1,15 @@
 Review Helper for Github
 ========================
 
-A simple utility to help you review a large PR.
+A simple utility to help you review large PRs.
 
-It returns a list of files sorted by number of changes.
+It returns a list of files modified within a PR sorted by the number of changes.
 
 ## Install
 
-1. TBD
+1. `$ go get github.com/igor-kupczynski/review-helper`
 2. Create a file `~/.review-helper.json.in`
-3. Put a following content there
+3. Put the following content there
   ```
 {"token": "your-github-access-token-with-repo-permissions"}
   ```
