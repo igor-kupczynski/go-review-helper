@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/google/go-github/github"
-	"golang.org/x/oauth2"
 	"io/ioutil"
 	"os"
 	"os/user"
 	"sort"
 	"strconv"
+
+	"github.com/google/go-github/github"
+	"golang.org/x/oauth2"
 )
 
 type tokenSpec struct {
@@ -57,7 +58,7 @@ func main() {
 	client := github.NewClient(tc)
 
 	// list all the files in a pull request
-	files, _, err := client.PullRequests.ListFiles(org, repo, pr, &github.ListOptions{})
+	files, _, err := client.PullRequests.ListFiles(org, repo, pr, &github.ListOptions{PerPage: 1000})
 	if err != nil {
 		panic(err)
 	}
