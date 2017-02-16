@@ -6,10 +6,10 @@ import (
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 	"io/ioutil"
-  "sort"
-  "os"
-  "strconv"
+	"os"
 	"os/user"
+	"sort"
+	"strconv"
 )
 
 type tokenSpec struct {
@@ -19,27 +19,26 @@ type tokenSpec struct {
 type byChanges []*github.CommitFile
 
 func (s byChanges) Len() int {
-  return len(s)
+	return len(s)
 }
 func (s byChanges) Swap(i, j int) {
-    s[i], s[j] = s[j], s[i]
+	s[i], s[j] = s[j], s[i]
 }
 func (s byChanges) Less(i, j int) bool {
-    return *s[i].Changes < *s[j].Changes
+	return *s[i].Changes < *s[j].Changes
 }
 
-
 func main() {
-  org, repo := os.Args[1], os.Args[2]
-  pr, err := strconv.Atoi(os.Args[3])
-  if err != nil {
-    panic(err)
-  }
+	org, repo := os.Args[1], os.Args[2]
+	pr, err := strconv.Atoi(os.Args[3])
+	if err != nil {
+		panic(err)
+	}
 
 	usr, err := user.Current()
-  if err != nil {
-      panic(err)
-  }
+	if err != nil {
+		panic(err)
+	}
 
 	content, err := ioutil.ReadFile(fmt.Sprintf("%v/.review-helper.json", usr.HomeDir))
 	if err != nil {
@@ -58,13 +57,13 @@ func main() {
 	client := github.NewClient(tc)
 
 	// list all the files in a pull request
-  files, _, err := client.PullRequests.ListFiles(org, repo, pr, &github.ListOptions{})
-  if err != nil {
-    panic(err)
-  }
+	files, _, err := client.PullRequests.ListFiles(org, repo, pr, &github.ListOptions{})
+	if err != nil {
+		panic(err)
+	}
 
-  sort.Sort(sort.Reverse(byChanges(files)))
-  for _, v := range files {
-    fmt.Printf("%v -> %v\n", *v.Filename, *v.Changes)
-  }
+	sort.Sort(sort.Reverse(byChanges(files)))
+	for _, v := range files {
+		fmt.Printf("%v -> %v\n", *v.Filename, *v.Changes)
+	}
 }
