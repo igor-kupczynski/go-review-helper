@@ -7,8 +7,8 @@ It returns a list of files modified within a PR sorted by the number of changes.
 
 ## Install
 
-1. `$ go get github.com/igor-kupczynski/review-helper`
-2. Create a file `~/.review-helper.json.in`
+1. `$ go get github.com/igor-kupczynski/go-review-helper`
+2. Create a file `~/.review-helper.json`
 3. Put the following content there
   ```
 {"token": "your-github-access-token-with-repo-permissions"}
@@ -17,14 +17,14 @@ It returns a list of files modified within a PR sorted by the number of changes.
 ## Usage
 
 ```
-$ review-helper <org> <repo> <pr-number>
+$ go-review-helper <org> <repo> <pr-number>
 ```
 
 For example to help you review the task cancelation mechanism in elasticsearch -
 https://github.com/elastic/elasticsearch/pull/16320 - use the following command.
 
 ```
-$ review-helper elastic elasticsearch 16320
+$ go-review-helper elastic elasticsearch 16320
 ore/src/main/java/org/elasticsearch/tasks/TaskManager.java -> 297
 core/src/main/java/org/elasticsearch/action/admin/cluster/node/tasks/cancel/TransportCancelTasksAction.java -> 285
 core/src/main/java/org/elasticsearch/action/admin/cluster/node/tasks/cancel/CancelTasksRequest.java -> 73
