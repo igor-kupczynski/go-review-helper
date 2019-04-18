@@ -40,8 +40,8 @@ func main() {
 	}
 
 	t, err := ghtoken.EnsureToken(
-		fmt.Sprintf("%s/.review-helper.json", home),
-		"github.com/igor-kupczynski/go-review-helper",
+		fmt.Sprintf("%s/.help-me-review.json", home),
+		"github.com/igor-kupczynski/help-me-review",
 		[]string{"repo"},
 	)
 	if err != nil {

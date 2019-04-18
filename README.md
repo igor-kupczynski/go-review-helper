@@ -1,5 +1,5 @@
-Review Helper for Github
-========================
+Help Me Review
+==============
 
 A simple utility to help you review large PRs.
 
@@ -7,24 +7,38 @@ It returns a list of files modified within a PR sorted by the number of changes.
 
 ## Install
 
-1. `$ go get github.com/igor-kupczynski/go-review-helper`
-2. Create a file `~/.review-helper.json`
-3. Put the following content there
-  ```
-{"token": "your-github-access-token-with-repo-permissions"}
-  ```
+`$ go get github.com/igor-kupczynski/help-me-review`
 
 ## Usage
 
+### Github Authentication
+
+First time you run the tool you'll be asked to authenticate with your github
+username and password (and possibly MFA code).
+
+The password is not stored, the tool generates a personal access token and
+stores it under `~/.help-me-review.json`. The token is then used to access
+github API.
+
+```sh
+$ help-me-review elastic elasticsearch 16320
+Provide your github credentials. They will be used to retrieve the token and won't be stored.
+Enter username: igor-kupczynski
+Enter password: 
+Enter one-time password: 832679
 ```
-$ go-review-helper <org> <repo> <pr-number>
+
+### Reviewing PRs 
+
+```
+$ help-me-review <org> <repo> <pr-number>
 ```
 
 For example to help you review the task cancelation mechanism in elasticsearch -
 https://github.com/elastic/elasticsearch/pull/16320 - use the following command.
 
 ```
-$ go-review-helper elastic elasticsearch 16320
+$ help-me-review elastic elasticsearch 16320
 ore/src/main/java/org/elasticsearch/tasks/TaskManager.java -> 297
 core/src/main/java/org/elasticsearch/action/admin/cluster/node/tasks/cancel/TransportCancelTasksAction.java -> 285
 core/src/main/java/org/elasticsearch/action/admin/cluster/node/tasks/cancel/CancelTasksRequest.java -> 73
